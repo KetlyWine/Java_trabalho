@@ -44,7 +44,7 @@ public class Program {
                         String email = ler.next();
                         System.out.println("Site: ");
                         String site = ler.next();
-                        
+                        System.out.println();
 
                         break;
                     case 2:
