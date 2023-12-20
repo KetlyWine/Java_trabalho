@@ -3,15 +3,18 @@ package model.entities;
 import java.time.LocalDateTime;
 
 public class Bilhete {
+    private int id;
     private Estacao estacaoPartida;
     private Estacao estacaoChegada;
     private Double preco;
     private String pagamento;
     private LocalDateTime dataDaCompra;
     private LocalDateTime dataDePartida;
+    private static int count = 0;
 
     public Bilhete(Estacao estacaoPartida, Estacao estacaoChegada, Double preco, String pagamento,
                    LocalDateTime dataDaCompra, LocalDateTime dataDePartida) {
+        this.id = count++;
         this.estacaoPartida = estacaoPartida;
         this.estacaoChegada = estacaoChegada;
         this.preco = preco;
@@ -20,6 +23,9 @@ public class Bilhete {
         this.dataDePartida = dataDePartida;
     }
 
+    public int getId() {
+        return id;
+    }
     public Estacao getEstacaoPartida() {
         return estacaoPartida;
     }
@@ -70,13 +76,14 @@ public class Bilhete {
 
     @Override
     public String toString() {
-        return "Bilhete{" +
-                "estacaoPartida=" + estacaoPartida +
-                ", estacaoChegada=" + estacaoChegada +
-                ", preco=" + preco +
-                ", pagamento='" + pagamento + '\'' +
-                ", dataDaCompra=" + dataDaCompra +
-                ", dataDePartida=" + dataDePartida +
-                '}';
+        return "------------ Bilhete ------------\n" +
+                "id: " + id +
+                "\nEstacao de Partida = " + estacaoPartida +
+                "\nEstacao de Chegada = " + estacaoChegada +
+                "\nValor = " + preco +
+                "\nPagamento = " + pagamento +
+                "\nData da Compra = " + dataDaCompra +
+                "\nData de Partida = " + dataDePartida +
+                "\n----------------------------------------\n";
     }
 }

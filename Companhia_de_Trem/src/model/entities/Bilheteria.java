@@ -2,71 +2,54 @@ package model.entities;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Bilheteria {
     private Passageiro passageiro;
-    private Bilhete bilhete;
-    private ArrayList<Passageiro> passageiros = new ArrayList<>();
-    private ArrayList<Bilhete> bilhetes = new ArrayList<>();
+    private List<Bilhete> bilhetes = new ArrayList<>();
 
-    public Bilheteria(Passageiro passageiro, Bilhete bilhete) {
+    public Bilheteria(Passageiro passageiro){
         this.passageiro = passageiro;
-        this.bilhete = bilhete;
-        passageiros.add(passageiro);
+    }
+
+    public void adicionarBilhete(Bilhete bilhete){
         bilhetes.add(bilhete);
     }
-
-    public ArrayList<Passageiro> getPassageiros() {
-        return passageiros;
+    public void cancelarBilhete(Bilhete bilhete){
+        bilhetes.remove(bilhete);
     }
 
-    public void setPassageiros(ArrayList<Passageiro> passageiros) {
-        this.passageiros = passageiros;
+    public void mudarPassageiro(Passageiro passag){
+        passageiro = passag;
     }
 
-    public ArrayList<Bilhete> getBilhetes() {
-        return bilhetes;
-    }
-
-    public void setBilhetes(ArrayList<Bilhete> bilhetes) {
-        this.bilhetes = bilhetes;
-    }
-
-    public Bilheteria(){}
-
-    public Passageiro getPassageiro() {
-        return passageiro;
-    }
-
-    public void setPassageiro(Passageiro passageiro) {
-        this.passageiro = passageiro;
-    }
-
-    public Bilhete getBilhete() {
-        return bilhete;
-    }
-
-    public void setBilhete(Bilhete bilhete) {
-        this.bilhete = bilhete;
-    }
-
-    public void GerarBilhete(){
-
+    public String imprimirBilhete() {
+        try {
+            int tamanho = bilhetes.size();
+            if (tamanho > 0) {
+                return bilhetes.get(tamanho - 1).toString();
+            }
+        } catch (IndexOutOfBoundsException e) {
+            System.err.println("A lista de bilhetes está vazia. Não é possível imprimir o bilhete.");
+        }
+        return "Nenhum bilhete disponível.";
     }
     public void relatorio(){
+        double valor_arrecadado = 0;
+        int quantidade = 0;
 
+        System.out.println("\t----- Relatório dos bilhetes vendidos -----\n");
+        for (Bilhete bilhete : bilhetes){
+            System.out.println(bilhete.toString());
+            valor_arrecadado += bilhete.getPreco();
+            quantidade++;
+        }
+        System.out.printf("Valor arrecadado: %.2f\nQuantidade vendida: %d", valor_arrecadado, quantidade);
     }
     public boolean verificarIdade(){
-        return false;
+        if (passageiro.getIdade() < 12)
+            return false;
+        return true;
     }
 
-    @Override
-    public String toString() {
-        return "Bilheteria{" +
-                "passageiro=" + passageiro +
-                ", bilhete=" + bilhete +
-                ", passageiros=" + passageiros +
-                ", bilhetes=" + bilhetes +
-                '}';
-    }
 }
