@@ -10,6 +10,7 @@ public class Companhia {
     private List<Contrato> contratos = new ArrayList<>();
     private List<Reserva> reservas = new ArrayList<>();
     private List<Estacao> estacoes = new ArrayList<>();
+    private List<Estacao> estacoesDisponiveis;
     private LogisticaDeCarga logisticaDeCarga;
     private List<Trem> trens = new ArrayList<>();
     private Map<Estacao, List<Estacao>> graph = new HashMap<>();
@@ -19,8 +20,10 @@ public class Companhia {
         this.nome = nome;
         this.id = id;
     }
-    public Companhia(){}
-
+    public Companhia(List<Estacao> estacoes) {
+        this.estacoes = new ArrayList<>(estacoes);
+        this.estacoesDisponiveis = new ArrayList<>(estacoes);
+    }
     public String getNome() {
         return nome;
     }
@@ -116,7 +119,42 @@ public class Companhia {
             }
         }
     }
+    public void mostrarEstacoesDisponiveis() {
+        if (!estacoesDisponiveis.isEmpty()) {
+            System.out.println("Estações disponíveis para escolha:");
+            for (int i = 0; i < estacoesDisponiveis.size(); i++) {
+                System.out.println(i + ". " + estacoesDisponiveis.get(i).getNome());
+            }
+        } else {
+            System.out.println("Não há mais estações disponíveis.");
+        }
+    }
+    public void escolherEstacoes(Scanner ler) {
+        System.out.println("Escolha as estações (digite os números separados por espaço):");
+        if (ler.hasNextLine()) {
+            String input = ler.nextLine();
+            String[] numeros = input.split(" ");
 
+            for (String nume : numeros) {
+                try {
+                    int i = Integer.parseInt(nume);
+                    if (i >= 0 && i < estacoesDisponiveis.size()) {
+                        Estacao estacaoEscolhida = estacoesDisponiveis.get(i);
+                        System.out.println("Estação escolhida: " + estacaoEscolhida.getNome());
+                        // Adicionar estação à companhia (você pode personalizar essa lógica)
+                        // companhiaecia.addEstacao(estacaoEscolhida);
+
+                        // Remover estação da lista de estações disponíveis
+                        estacoesDisponiveis.remove(estacaoEscolhida);
+                    } else {
+                        System.out.println("Número inválido: " + nume);
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Formato inválido: " + nume);
+                }
+            }
+        }
+    }
 
 
     @Override
