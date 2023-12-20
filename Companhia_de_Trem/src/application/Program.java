@@ -2,11 +2,13 @@ package application;
 
 import model.entities.*;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Program {
     public static void main(String[] args) {
         Scanner ler = new Scanner(System.in);
+        ArrayList<Empresa> empresas = new ArrayList<>();
         Companhia companhiaecia = new Companhia("Companhia & cia", 10);
 
         TremPassageiro tremPassageiro1 = new TremPassageiro(1, "Expresso", 1000, FonteDeEnergia.ELETRICA, 10, 60, 30.0);
@@ -31,7 +33,7 @@ public class Program {
                 menu = ler.nextInt();
                 switch(menu){
                     case 1:
-
+                        /*
                         System.out.print("Digite o nome da empresa: ");
                         String nome = ler.next();
                         System.out.print("CNPJ: ");
@@ -44,11 +46,50 @@ public class Program {
                         String email = ler.next();
                         System.out.println("Site: ");
                         String site = ler.next();
-                        System.out.println();
+                        while(true){
+                            System.out.println("Qual setor?");
+                            System.out.println("1. Indústria.");
+                            System.out.println("2. Mineração.");
+                            System.out.println("3. Serviços.");
+                            System.out.println("4. Agricultura.");
+                            System.out.println("5. Automotivo.");
+                            System.out.println("6. Manufatureira.");
+                            int set;
+                            if (ler.hasNextInt()) {
+                                set = ler.nextInt();
+                                switch(set){
+                                    case 1:
+                                        empresas.add(new Empresa(nome, cnpj, end, numero, email, site, Setor.INDUSTRIA));
+                                        break;
+                                    case 2:
+                                        empresas.add(new Empresa(nome, cnpj, end, numero, email, site, Setor.MINERACAO));
+                                        break;
+                                    case 3:
+                                        empresas.add(new Empresa(nome, cnpj, end, numero, email, site, Setor.SERVICOS));
+                                        break;
+                                    case 4:
+                                        empresas.add(new Empresa(nome, cnpj, end, numero, email, site, Setor.AGRICULTURA));
+                                        break;
+                                    case 5:
+                                        empresas.add(new Empresa(nome, cnpj, end, numero, email, site, Setor.AUTOMOTIVO));
+                                        break;
+                                    case 6:
+                                        empresas.add(new Empresa(nome, cnpj, end, numero, email, site, Setor.MANUFATUREIRA));
+                                        break;
+                                    default:
+                                        System.out.println("Número inválido.");
 
-                        break;
+
+                                }
+                            } else {
+                                ler.next();
+                                System.out.println("Entrada inválida. Tente novamente.");
+                            }
+                        } */
+                        Empresa surpriseE = new Empresa("Surprise", "12.345.678/0001-90", "Rua Florida - bairro Sao Jorge", 156, "surprise@gmail.com", "surprise.com", Setor.SERVICOS);
                     case 2:
                         System.out.println("B");
+                        break;
                 }
             } else {
                 ler.next();
