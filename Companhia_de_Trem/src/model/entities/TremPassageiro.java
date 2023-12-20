@@ -8,9 +8,9 @@ public class TremPassageiro extends Trem{
     public TremPassageiro() {
     }
 
-    public TremPassageiro(int numero, String modelo, Integer potencia, Double numeroVagoes,
-                          FonteDeEnergia fonte, int capacidadeDePassageiros, double bagageiros) {
-        super(numero, modelo, potencia, numeroVagoes, fonte);
+    public TremPassageiro(int numero, String modelo, Integer potencia, FonteDeEnergia fonte,
+                          int numeroVagoes, int capacidadeDePassageiros, double bagageiros) {
+        super(numero, modelo, potencia, fonte, numeroVagoes);
         this.capacidadeDePassageiros = capacidadeDePassageiros;
         this.bagageiros = bagageiros;
     }

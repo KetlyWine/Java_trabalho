@@ -4,6 +4,10 @@ public class LogisticaDeCarga {
     private Estacao localDeDespejo;
     private Estacao localDeEmbarque;
 
+
+    public LogisticaDeCarga() {
+    }
+
     public LogisticaDeCarga(Estacao localDeDespejo, Estacao localDeEmbarque) {
         this.localDeDespejo = localDeDespejo;
         this.localDeEmbarque = localDeEmbarque;

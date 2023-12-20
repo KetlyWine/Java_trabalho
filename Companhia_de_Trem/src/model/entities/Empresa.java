@@ -1,23 +1,24 @@
 package model.entities;
 
 public class Empresa{
-    private String site;
-    private Setor setor;
+
     private String nome;
     private String cnpj;
     private String endereco;
-    private String numero;
+    private int numero;
     private String email;
+    private String site;
+    private Setor setor;
 
-    public Empresa(String site, Setor setor, String nome, String cnpj,
-                   String endereco, String numero, String email) {
-        this.site = site;
-        this.setor = setor;
+    public Empresa(String nome, String cnpj, String endereco,
+                   int numero, String email, String site, Setor setor) {
         this.nome = nome;
         this.cnpj = cnpj;
         this.endereco = endereco;
         this.numero = numero;
         this.email = email;
+        this.site = site;
+        this.setor = setor;
     }
 
     public String getSite() {
@@ -60,11 +61,11 @@ public class Empresa{
         this.endereco = endereco;
     }
 
-    public String getNumero() {
+    public int getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(int numero) {
         this.numero = numero;
     }
 
