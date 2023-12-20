@@ -2,17 +2,15 @@ package application;
 
 import model.entities.*;
 
-<<<<<<< HEAD
 import java.time.LocalDateTime;
-=======
 import java.util.ArrayList;
->>>>>>> 29da3543ac0d196548823336576f4ef76787611f
 import java.util.Scanner;
 
 public class Program {
     public static void main(String[] args) {
         Scanner ler = new Scanner(System.in);
         ArrayList<Empresa> empresas = new ArrayList<>();
+        ArrayList<Estacao> estacoes = new ArrayList<>();
         Companhia companhiaecia = new Companhia("Companhia & cia", 10);
 
         TremPassageiro tremPassageiro1 = new TremPassageiro(1, "Expresso", 1000, FonteDeEnergia.ELETRICA, 10, 60, 30.0);
@@ -40,13 +38,13 @@ public class Program {
             System.out.println("4. Visualizar contratos de cada empresa.");
             System.out.println("5. Visualizar o trajeto de cada trem.");
             System.out.println("6. Visualizar passagens já reservadas.");
+            System.out.println("7. Cadastrar companhia.");
             int menu;
 
             if (ler.hasNextInt()) {
                 menu = ler.nextInt();
-                switch(menu){
+                switch(menu) {
                     case 1:
-                        /*
                         System.out.print("Digite o nome da empresa: ");
                         String nome = ler.next();
                         System.out.print("CNPJ: ");
@@ -59,7 +57,7 @@ public class Program {
                         String email = ler.next();
                         System.out.println("Site: ");
                         String site = ler.next();
-                        while(true){
+                        while (true) {
                             System.out.println("Qual setor?");
                             System.out.println("1. Indústria.");
                             System.out.println("2. Mineração.");
@@ -70,7 +68,7 @@ public class Program {
                             int set;
                             if (ler.hasNextInt()) {
                                 set = ler.nextInt();
-                                switch(set){
+                                switch (set) {
                                     case 1:
                                         empresas.add(new Empresa(nome, cnpj, end, numero, email, site, Setor.INDUSTRIA));
                                         break;
@@ -98,11 +96,25 @@ public class Program {
                                 ler.next();
                                 System.out.println("Entrada inválida. Tente novamente.");
                             }
-                        } */
-                        Empresa surpriseE = new Empresa("Surprise", "12.345.678/0001-90", "Rua Florida - bairro Sao Jorge", 156, "surprise@gmail.com", "surprise.com", Setor.SERVICOS);
+                        }
+
                     case 2:
-                        System.out.println("B");
+                        System.out.print("Digite o nome da estação: ");
+                        String name = ler.next();
+                        System.out.print("Endereço: ");
+                        String ende = ler.next();
+                        System.out.print("Estado operacional: ");
+                        String op = ler.next();
+                        estacoes.add(new Estacao(name, ende, op));
                         break;
+                    case 7:
+                        System.out.print("Digite o nome da Companhia: ");
+                        String nomeC = ler.next();
+                        System.out.print("Id: ");
+                        int id = ler.nextInt();
+                        System.out.println("Quais estações são desta companhia?");
+                        
+
                 }
             } else {
                 ler.next();
