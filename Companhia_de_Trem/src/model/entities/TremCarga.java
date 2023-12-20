@@ -1,6 +1,6 @@
 package model.entities;
 
-public class TremCarga extends Trem{
+public class  TremCarga extends Trem{
     private Double capacidadeDeCarga;
     private Double cargaDisponivel;
 
