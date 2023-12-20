@@ -3,6 +3,10 @@ package application;
 import model.entities.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;

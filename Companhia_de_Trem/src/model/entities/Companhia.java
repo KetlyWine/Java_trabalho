@@ -105,18 +105,19 @@ public class Companhia {
     }
 
     public void exibir() {
+        System.out.printf("%-20s %-20s %s%n", "Estação", "Estação Conectada", "Distância");
+        System.out.println("-----------------------------------------------------");
         for (Map.Entry<Estacao, List<Estacao>> entry : graph.entrySet()) {
             Estacao estacao = entry.getKey();
             List<Estacao> estacoesConectadas = entry.getValue();
-            System.out.println("Estação: " + estacao.getNome());
-            System.out.println("Estações conectadas:");
             for (Estacao estacaoConectada : estacoesConectadas) {
                 double distancia = distancias.get(new AbstractMap.SimpleEntry<>(estacao, estacaoConectada));
-                System.out.println("- " + estacaoConectada.getNome() + " (distância: " + distancia + ")");
+                System.out.printf("%-20s %-20s %.2f%n", estacao.getNome(), estacaoConectada.getNome(), distancia);
             }
-            System.out.println();
         }
     }
+
+
 
     @Override
     public String toString() {
