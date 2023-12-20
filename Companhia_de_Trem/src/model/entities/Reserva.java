@@ -2,9 +2,11 @@ package model.entities;
 
 public class Reserva {
     private Bilheteria bilheteria;
+    private TremPassageiro trem;
 
-    public Reserva(Bilheteria bilheteria) {
+    public Reserva(Bilheteria bilheteria, TremPassageiro trem) {
         this.bilheteria = bilheteria;
+        this.trem = trem;
     }
 
     public Bilheteria getBilheteria() {
