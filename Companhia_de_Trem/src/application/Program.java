@@ -2,16 +2,14 @@ package application;
 
 import model.entities.*;
 
-<<<<<<< HEAD
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-=======
 
 import java.time.LocalDateTime;
-
 import java.util.ArrayList;
 
->>>>>>> d838a13162935abe8eccec892264d9b191ef24c4
+
+import java.time.LocalDateTime;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Program {
