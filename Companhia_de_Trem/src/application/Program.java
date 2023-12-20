@@ -1,17 +1,10 @@
 package application;
 
 import model.entities.*;
-
-<<<<<<< HEAD
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-=======
-
 import java.time.LocalDateTime;
-
 import java.util.ArrayList;
-
->>>>>>> d838a13162935abe8eccec892264d9b191ef24c4
 import java.util.Scanner;
 
 public class Program {
@@ -41,7 +34,7 @@ public class Program {
         Empresa surprise = new Empresa("Surprise", "12.345.678/0001-90", "Rua Florida - bairro Sao Jorge", 156, "surprise@gmail.com", "surprise.com", Setor.SERVICOS);
 
         while (true){
-            System.out.println("---Companhia de Trem---");
+            System.out.println("---Companhia de---");
             System.out.println("1. Cadastrar empresa.");
             System.out.println("2. Cadastrar estação.");
             System.out.println("3. Comprar passagem.");
@@ -123,7 +116,7 @@ public class Program {
                         System.out.print("Id: ");
                         int id = ler.nextInt();
                         System.out.println("Quais estações são desta companhia?");
-                        
+
 
                 }
             } else {
