@@ -2,11 +2,11 @@ package application;
 
 import model.entities.*;
 
-<<<<<<< HEAD
+
 import java.time.LocalDateTime;
-=======
+
 import java.util.ArrayList;
->>>>>>> 29da3543ac0d196548823336576f4ef76787611f
+
 import java.util.Scanner;
 
 public class Program {
@@ -29,6 +29,8 @@ public class Program {
         rs.atribuirAssento(2);
         rs.mostrarAssentosDisponiveis();
         rs.relatorioReserva();
+        companhiaecia.conectarEstacoes(estacao1, estacao2, 30.0);
+        companhiaecia.exibir();
 
         Empresa surprise = new Empresa("Surprise", "12.345.678/0001-90", "Rua Florida - bairro Sao Jorge", 156, "surprise@gmail.com", "surprise.com", Setor.SERVICOS);
 
