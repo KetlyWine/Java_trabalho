@@ -1,9 +1,13 @@
 package model.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TremPassageiro extends Trem{
 
     private int capacidadeDePassageiros;
     private double bagageiros;
+    private boolean[] assentos;
 
     public TremPassageiro() {
     }
@@ -13,6 +17,10 @@ public class TremPassageiro extends Trem{
         super(numero, modelo, potencia, fonte, numeroVagoes);
         this.capacidadeDePassageiros = capacidadeDePassageiros;
         this.bagageiros = bagageiros;
+        assentos = new boolean[capacidadeDePassageiros];
+        for (int i = 0; i < capacidadeDePassageiros; i++) {
+            assentos[i] = true; // Todos os assentos estão disponíveis no início
+        }
     }
 
     public int getCapacidadeDePassageiros() {
@@ -29,6 +37,15 @@ public class TremPassageiro extends Trem{
 
     public void setBagageiros(double bagageiros) {
         this.bagageiros = bagageiros;
+    }
+    public List<Integer> getAssentosDisponiveis() {
+        List<Integer> assentosDisponiveis = new ArrayList<>();
+        for (int i = 0; i < assentos.length; i++) {
+            if (assentos[i]) {
+                assentosDisponiveis.add(i+1);
+            }
+        }
+        return assentosDisponiveis;
     }
 
     @Override
