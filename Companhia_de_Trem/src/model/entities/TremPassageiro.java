@@ -47,6 +47,11 @@ public class TremPassageiro extends Trem{
         }
         return assentosDisponiveis;
     }
+    public void atribuirAssento(int numeroAssento) {
+        if (numeroAssento > 0 && numeroAssento <= assentos.length) {
+            assentos[numeroAssento - 1] = false;
+        }
+    }
 
     @Override
     public String toString() {

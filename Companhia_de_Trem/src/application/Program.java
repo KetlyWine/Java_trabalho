@@ -2,6 +2,7 @@ package application;
 
 import model.entities.*;
 
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Program {
@@ -14,6 +15,15 @@ public class Program {
 
         Estacao estacao1 = new Estacao("Cia Station", "Rua Bahia - Bairro carajas", "ativo");
         Estacao estacao2 = new Estacao("Cia&Cia Station", "Rua Lord - Bairro Flores", "ativo");
+
+        Passageiro pass = new Passageiro();
+        Bilhete bilhete = new Bilhete(estacao1, estacao2, 3.0, "cartao", LocalDateTime.now(), LocalDateTime.now());
+        Bilheteria bt = new Bilheteria(pass);
+        Reserva rs = new Reserva(bt, tremPassageiro1);
+        rs.mostrarAssentosDisponiveis();
+        rs.atribuirAssento(2);
+        rs.mostrarAssentosDisponiveis();
+        rs.relatorioReserva();
 
         Empresa surprise = new Empresa("Surprise", "12.345.678/0001-90", "Rua Florida - bairro Sao Jorge", 156, "surprise@gmail.com", "surprise.com", Setor.SERVICOS);
 
