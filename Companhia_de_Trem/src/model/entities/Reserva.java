@@ -25,4 +25,11 @@ public class Reserva {
     public void relatorioReserva(){
 
     }
+
+    @Override
+    public String toString() {
+        return "Reserva{" +
+                "bilheteria=" + bilheteria +
+                '}';
+    }
 }
