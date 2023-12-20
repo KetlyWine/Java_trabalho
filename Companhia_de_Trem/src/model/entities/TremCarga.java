@@ -4,9 +4,9 @@ public class  TremCarga extends Trem{
     private Double capacidadeDeCarga;
     private Double cargaDisponivel;
 
-    public TremCarga(int numero, String modelo, Integer potencia, Double numeroVagoes,
-                     FonteDeEnergia fonte, Double capacidadeDeCarga) {
-        super(numero, modelo, potencia, numeroVagoes, fonte);
+    public TremCarga(int numero, String modelo, Integer potencia, int numeroVagoes,
+                     FonteDeEnergia fonte, double capacidadeDeCarga) {
+        super(numero, modelo, potencia,fonte, numeroVagoes);
         this.capacidadeDeCarga = capacidadeDeCarga;
         this.cargaDisponivel = capacidadeDeCarga;
     }
