@@ -4,6 +4,7 @@ public class Estacao {
     private String nome;
     private String endereco;
     private String estadoOperacional;
+    private Bilheteria bilheteria;
 
     public Estacao() {
     }
@@ -38,12 +39,21 @@ public class Estacao {
         this.estadoOperacional = estadoOperacional;
     }
 
+    public Bilheteria getBilheteria() {
+        return bilheteria;
+    }
+
+    public void setBilheteria(Bilheteria bilheteria) {
+        this.bilheteria = bilheteria;
+    }
+
     @Override
     public String toString() {
         return "Estacao{" +
                 "nome='" + nome + '\'' +
                 ", endereco='" + endereco + '\'' +
                 ", estadoOperacional='" + estadoOperacional + '\'' +
+                ", bilheteria=" + bilheteria +
                 '}';
     }
 }

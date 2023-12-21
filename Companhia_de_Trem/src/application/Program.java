@@ -3,6 +3,7 @@ package application;
 import model.entities.*;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -41,11 +42,12 @@ public class Program {
 
 
         while (true){
-            System.out.println("---Companhia de Trem---");
+            System.out.println("\n---Companhia Trem Baum---");
             System.out.println("1. Cadastrar empresa.");
             System.out.println("2. Cadastrar estação.");
             System.out.println("3. Comprar passagem.");
-            System.out.println("4. Realizar contrato.");
+            System.out.println("4. Relatório das passsagens vendidas.");
+            System.out.println("5. Realizar contrato.");
             System.out.println("5. Visualizar o trajeto de cada trem.");
             System.out.println("6. Visualizar passagens já reservadas.");
             System.out.println("7. Cadastrar companhia.");
@@ -87,22 +89,22 @@ public class Program {
 
                                     switch (set) {
                                         case 1:
-                                            empresas.add(new Empresa(nome, cnpj, end, numero, email, site, Setor.INDUSTRIA));
+                                            companiaTremBaum.addEmpresa(new Empresa(nome, cnpj, end, numero, email, site, Setor.INDUSTRIA));
                                             break;
                                         case 2:
-                                            empresas.add(new Empresa(nome, cnpj, end, numero, email, site, Setor.MINERACAO));
+                                            companiaTremBaum.addEmpresa(new Empresa(nome, cnpj, end, numero, email, site, Setor.MINERACAO));
                                             break;
                                         case 3:
-                                            empresas.add(new Empresa(nome, cnpj, end, numero, email, site, Setor.SERVICOS));
+                                            companiaTremBaum.addEmpresa(new Empresa(nome, cnpj, end, numero, email, site, Setor.SERVICOS));
                                             break;
                                         case 4:
-                                            empresas.add(new Empresa(nome, cnpj, end, numero, email, site, Setor.AGRICULTURA));
+                                            companiaTremBaum.addEmpresa(new Empresa(nome, cnpj, end, numero, email, site, Setor.AGRICULTURA));
                                             break;
                                         case 5:
-                                            empresas.add(new Empresa(nome, cnpj, end, numero, email, site, Setor.AUTOMOTIVO));
+                                            companiaTremBaum.addEmpresa(new Empresa(nome, cnpj, end, numero, email, site, Setor.AUTOMOTIVO));
                                             break;
                                         case 6:
-                                            empresas.add(new Empresa(nome, cnpj, end, numero, email, site, Setor.MANUFATUREIRA));
+                                            companiaTremBaum.addEmpresa(new Empresa(nome, cnpj, end, numero, email, site, Setor.MANUFATUREIRA));
                                             break;
                                         default:
                                             System.out.println("Número inválido.");
@@ -128,7 +130,7 @@ public class Program {
                             System.out.print("Estado operacional: ");
                             String op = ler.nextLine();
 
-                            estacoes.add(new Estacao(name, ende, op));
+                            companiaTremBaum.addEstacao(new Estacao(name, ende, op));
 
                         } catch (InputMismatchException e) {
                             System.out.println("Entrada inválida. Certifique-se de fornecer o tipo correto de dados.");
@@ -160,6 +162,8 @@ public class Program {
                                 System.out.print("Informe a estação de Partida: ");
                                 int indexPartida = ler.nextInt();
                                 Estacao estacaoPartida = companiaTremBaum.getEstacoes().get(indexPartida - 1);
+
+                                companiaTremBaum.getEstacoes().get(indexPartida-1).setBilheteria(bilheteria);
 
                                 System.out.print("Informe a estação de Chegada: ");
                                 int indexChegada = ler.nextInt();
@@ -197,19 +201,85 @@ public class Program {
                         }
                         break;
                     case 4:
-                        if (!companiaTremBaum.getEmpresas().isEmpty()){
-                            System.out.println("--- Informações para realização do Contrato ---");
-                            System.out.println("Data de inicio (dd/MM/yyyy HH:mm): ");
-                            String dataInicio = ler.nextLine();
-                            System.out.println("Data de término (dd/MM/yyyy HH:mm): ");
-                            String dataFinal = ler.nextLine();
-                            System.out.println("Orçamento: ");
-                            double orcamento = ler.nextDouble(); ler.nextLine();
-                            System.out.println("Tipo de Carga: ");
-                            
-                        }
+                        try {
+                            int i = 0;
+                            System.out.println("|\tInforme a estação do relatório\t|");
 
+                            for (Estacao estacao : companiaTremBaum.getEstacoes()) {
+                                i++;
+                                System.out.printf("%d - %s%n", i, estacao.getNome());
+                            }
+
+                            System.out.print("Estação (número): ");
+                            int num = ler.nextInt();
+
+                            if (num < 1 || num > companiaTremBaum.getEstacoes().size()) {
+                                System.out.println("Número de estação inválido. Informe um número válido.");
+                            } else {
+                                Estacao estacao = companiaTremBaum.getEstacoes().get(num - 1);
+
+                                System.out.println("\t----- Relatório -----");
+
+                                if (estacao.getBilheteria() != null) {
+                                    estacao.getBilheteria().relatorio();
+                                } else {
+                                    System.out.println("A estação selecionada não possui uma bilheteria para gerar relatório.");
+                                }
+                            }
+                        } catch (InputMismatchException e) {
+                            System.out.println("Entrada inválida. Certifique-se de fornecer um número inteiro.");
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.println("Número de estação inválido. Informe um número válido.");
+                        } break;
+
+                    case 5:
+                        try {
+                            if (!companiaTremBaum.getEmpresas().isEmpty()) {
+                                System.out.println("--- Informações para realização do Contrato ---");
+                                System.out.print("Data de inicio (dd/MM/yyyy HH:mm): ");
+                                String dataInicio = ler.nextLine();
+                                System.out.print("Data de término (dd/MM/yyyy HH:mm): ");
+                                String dataFinal = ler.nextLine();
+                                System.out.print("Orçamento: ");
+                                Double orcamento = ler.nextDouble();
+                                ler.nextLine();
+                                System.out.print("Tipo de Carga: ");
+                                String tipoCarga = ler.nextLine();
+                                System.out.println("Escolha a empresa relacionada: ");
+
+                                int i = 1;
+                                for (Empresa empresa : companiaTremBaum.getEmpresas()) {
+                                    System.out.printf("%d - %s - %s%n", i, empresa.getNome(), empresa.getSetor());
+                                    i++;
+                                }
+
+                                System.out.print("Empresa (numero): ");
+                                int index = ler.nextInt();
+                                ler.nextLine(); // Consume the newline character
+                                Empresa empresa = companiaTremBaum.getEmpresas().get(index - 1);
+
+                                Contrato contrato = new Contrato(LocalDate.parse(dataInicio, formatoData), LocalDate.parse(dataFinal, formatoData), orcamento, tipoCarga, empresa);
+                                companiaTremBaum.addContrato(contrato);
+                                System.out.println("CONTRATO REALIZADO COM SUCESSO");
+                                System.out.println(contrato.toString());
+                            } else {
+                                System.out.println("Cadastre uma empresa antes!");
+                            }
+                        } catch (InputMismatchException e) {
+                            System.out.println("Entrada inválida. Certifique-se de fornecer os dados corretamente.");
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.println("Índice inválido. Verifique a lista de empresas e escolha um número válido.");
+                        }
+                        break;
+                    case 6:
+
+                        break;
                     case 7:
+
+
+
+                        break;
+                    case 8:
 
                         break;
 

@@ -61,12 +61,11 @@ public class Contrato {
 
     @Override
     public String toString() {
-        return "Contrato{" +
-                "dataInicio=" + dataInicio +
-                ", dataFim=" + dataFim +
-                ", orcamento=" + orcamento +
-                ", tipoDeCarga='" + tipoDeCarga + '\'' +
-                ", empresa=" + empresa +
-                '}';
+        return "------------Contrato-----------" +
+                "\nData de inicio => " + dataInicio +
+                "\nData do Termino => " + dataFim +
+                "\norcamento => " + orcamento +
+                "\nTipoDeCarga => " + tipoDeCarga  +
+                "\nEmpresa => " + empresa.getNome();
     }
 }
