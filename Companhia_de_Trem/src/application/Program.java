@@ -16,7 +16,6 @@ public class Program {
         Scanner ler = new Scanner(System.in);
         ArrayList<Empresa> empresas = new ArrayList<>();
         ArrayList<Estacao> estacoes = new ArrayList<>();
-        ArrayList<Estacao> estacoesDisponiveis = new ArrayList<>(estacoes);
         ArrayList<Companhia> companhias = new ArrayList<>();
 
         Companhia companhiaecia = new Companhia("Companhia & cia", 10);
