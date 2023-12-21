@@ -47,13 +47,5 @@ public class Estacao {
         this.bilheteria = bilheteria;
     }
 
-    @Override
-    public String toString() {
-        return "Estacao{" +
-                "nome='" + nome + '\'' +
-                ", endereco='" + endereco + '\'' +
-                ", estadoOperacional='" + estadoOperacional + '\'' +
-                ", bilheteria=" + bilheteria +
-                '}';
-    }
+
 }

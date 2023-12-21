@@ -3,20 +3,10 @@ package model.entities;
 import java.util.List;
 
 public class Reserva {
-    private Bilheteria bilheteria;
     private TremPassageiro trem;
 
-    public Reserva(Bilheteria bilheteria, TremPassageiro trem) {
-        this.bilheteria = bilheteria;
+    public Reserva( TremPassageiro trem) {
         this.trem = trem;
-    }
-
-    public Bilheteria getBilheteria() {
-        return bilheteria;
-    }
-
-    public void setBilheteria(Bilheteria bilheteria) {
-        this.bilheteria = bilheteria;
     }
 
     public void mostrarAssentosDisponiveis() {
@@ -36,7 +26,7 @@ public class Reserva {
         }
     }
 
-    public void atribuirAssento(int numeroAssento) {
+    public void agendarAssento(int numeroAssento) {
         List<Integer> assentosDisponiveis = trem.getAssentosDisponiveis();
         if (assentosDisponiveis.contains(numeroAssento)) {
             trem.atribuirAssento(numeroAssento);
@@ -59,7 +49,7 @@ public class Reserva {
     @Override
     public String toString() {
         return "Reserva{" +
-                "bilheteria=" + bilheteria +
+                "trem=" + trem +
                 '}';
     }
 }

@@ -55,9 +55,9 @@ public class TremPassageiro extends Trem{
 
     @Override
     public String toString() {
-        return "TremPassageiro{" +
-                "capacidadeDePassageiros=" + capacidadeDePassageiros +
-                ", bagageiros=" + bagageiros +
+        return "TremPassageiro {" +
+                "capacidadeDePassageiros = " + capacidadeDePassageiros +
+                ", bagageiros = " + bagageiros +
                 '}';
     }
 }

@@ -39,18 +39,20 @@ public class Program {
 
         TremPassageiro tremPassageiro1 = new TremPassageiro(1, "Expresso", 1000, FonteDeEnergia.ELETRICA, 10, 60, 30.0);
         TremPassageiro tremPassageiro2 = new TremPassageiro(2, "Expresso", 1200, FonteDeEnergia.DIESEL, 15, 80, 50.0);
+        companiaTremBaum.addTrem(tremPassageiro1);
+        companiaTremBaum.addTrem(tremPassageiro2);
 
-
-        while (true){
+        boolean validacao = true;
+        while (validacao){
             System.out.println("\n---Companhia Trem Baum---");
             System.out.println("1. Cadastrar empresa.");
             System.out.println("2. Cadastrar estação.");
             System.out.println("3. Comprar passagem.");
             System.out.println("4. Relatório das passsagens vendidas.");
             System.out.println("5. Realizar contrato.");
-            System.out.println("5. Visualizar o trajeto de cada trem.");
-            System.out.println("6. Visualizar passagens já reservadas.");
-            System.out.println("7. Cadastrar companhia.");
+            System.out.println("6. Adicionar Trem.");
+            System.out.println("7. Conectar estações.");
+            System.out.println("8. Sair.");
             int menu;
             System.out.print("Opção: ");
 
@@ -132,11 +134,14 @@ public class Program {
 
                             companiaTremBaum.addEstacao(new Estacao(name, ende, op));
 
+                            System.out.println("ESTAÇÃO CADASTRADA COM SUCESSO!");
+
                         } catch (InputMismatchException e) {
                             System.out.println("Entrada inválida. Certifique-se de fornecer o tipo correto de dados.");
                         } catch (Exception e) {
                             System.out.println("Ocorreu um erro durante a leitura. Detalhes: " + e.getMessage());
                         }
+
                         break;
                     case 3:
                         try {
@@ -154,7 +159,7 @@ public class Program {
                             Passageiro passageiro = new Passageiro(nome, rg, idade);
                             Bilheteria bilheteria = new Bilheteria(passageiro);
 
-                            System.out.println("====== BILHETERIA =======");
+                            System.out.println("======= BILHETERIA =======");
                             if (bilheteria.verificarIdade()) {
                                 System.out.println("Estações: ");
                                 companiaTremBaum.exibir();
@@ -182,8 +187,28 @@ public class Program {
                                     System.out.println("Erro ao obter a distância.");
                                     return;
                                 }
+                                int i = 0;
+                                System.out.println("Trens disponíveis - selecione: ");
+                                for (Trem trem : companiaTremBaum.getTrens()) {
+                                    if (trem instanceof TremPassageiro) {
+                                        TremPassageiro tremPassageiro = (TremPassageiro) trem;
+                                        System.out.printf("%d - id: %d - %s - %s\n", i+1, tremPassageiro.getNumero(), tremPassageiro.getModelo(), tremPassageiro.toString());
+                                    }
+                                    i++;
+                                }
 
-                                System.out.println("Informe data e horário de Partida (dd/MM/yyyy HH:mm): ");
+                                System.out.print("opção (numero): ");
+                                int index = ler.nextInt();
+                                TremPassageiro trem = (TremPassageiro) companiaTremBaum.getTrens().get(index-1);
+                                Reserva reserva = new Reserva(trem);
+
+                                System.out.println("Reserve um assento: ");
+                                reserva.mostrarAssentosDisponiveis();
+                                System.out.print("\nInforme a numeração do assento escolhido: ");
+                                int num = ler.nextInt(); ler.nextLine();
+                                reserva.agendarAssento(num);
+
+                                System.out.print("Informe data e horário de Partida (dd/MM/yyyy HH:mm): ");
                                 String data = ler.nextLine();
                                 LocalDateTime dataPartida = LocalDateTime.parse(data, formatoData);
 
@@ -225,6 +250,7 @@ public class Program {
                                 } else {
                                     System.out.println("A estação selecionada não possui uma bilheteria para gerar relatório.");
                                 }
+
                             }
                         } catch (InputMismatchException e) {
                             System.out.println("Entrada inválida. Certifique-se de fornecer um número inteiro.");
@@ -272,17 +298,96 @@ public class Program {
                         }
                         break;
                     case 6:
+                        System.out.println("==== Adicionando Trem ====");
+                        System.out.println("Escolha o tipo de trem: \n1 - Trem de Passageiro\n 2 - Trem de Carga");
+                        System.out.print("Opção: ");
+                        int num = ler.nextInt(); ler.nextLine();
+                        if (num >= 1 && num <= 2){
+                            if (num == 1){
+                                System.out.println(" -- Trem Passageiro --");
+                                System.out.print("Numero: ");
+                                int numero = ler.nextInt(); ler.nextLine();
+                                System.out.print("Modelo: ");
+                                String modelo = ler.nextLine();
+                                System.out.print("Potencia: ");
+                                int potencia = ler.nextInt();
+                                System.out.print("Numero de Vagões: ");
+                                int numVagao = ler.nextInt();
+                                System.out.print("Capacidade de passageiros: ");
+                                int capacPassag = ler.nextInt();
+                                System.out.print("Capacidade de bagagem (m^2): ");
+                                double capacidade = ler.nextDouble(); ler.nextLine();
 
+                                TremPassageiro tremPassageiro = new TremPassageiro(numero, modelo, potencia, FonteDeEnergia.ELETRICA, numVagao, capacPassag, capacidade);
+                                companiaTremBaum.addTrem(tremPassageiro);
+                            } else {
+                                System.out.println(" -- Trem Carga --");
+                                System.out.print("Numero: ");
+                                int numero = ler.nextInt(); ler.nextLine();
+                                System.out.print("Modelo: ");
+                                String modelo = ler.nextLine();
+                                System.out.print("Potencia: ");
+                                int potencia = ler.nextInt();
+                                System.out.print("Numero de Vagões: ");
+                                int numVagao = ler.nextInt();
+                                System.out.print("Capacidade de carga (m^2): ");
+                                double capacidade = ler.nextDouble(); ler.nextLine();
+
+                                TremCarga tremcarga = new TremCarga(numero, modelo, potencia, numVagao,FonteDeEnergia.ELETRICA, capacidade);
+                                companiaTremBaum.addTrem(tremcarga);
+                            }
+                        } else
+                            System.out.println("Opção inválida");
+                        System.out.println("ADICIONADO!");
                         break;
                     case 7:
+                        int i = 0;
+                        System.out.println(" ==== CONECTAR ESTAÇÕES ====");
+                        System.out.println("Primeira estação: ");
+                        List<Estacao> estacoesDisponiveis = new ArrayList<>(companiaTremBaum.getEstacoes());
 
+                        for (Estacao estacao : estacoesDisponiveis) {
+                            System.out.printf("%d - %s%n", i+1, estacao.getNome());
+                            i++;
+                        }
 
+                        System.out.print("Opção: ");
+                        int opcao1 = ler.nextInt();
+                        ler.nextLine();
 
+                        if (opcao1 < 1 || opcao1 > estacoesDisponiveis.size()) {
+                            System.out.println("Opção inválida");
+                        } else {
+                            Estacao primeira = estacoesDisponiveis.get(opcao1 - 1);
+                            estacoesDisponiveis.remove(primeira);
+
+                            i = 0;
+                            System.out.println("Segunda estação: ");
+                            for (Estacao estacao : estacoesDisponiveis) {
+                                System.out.printf("%d - %s%n", i+1, estacao.getNome());
+                                i++;
+                            }
+
+                            System.out.print("Opção: ");
+                            int opcao2 = ler.nextInt();
+                            ler.nextLine();
+
+                            if (opcao2 < 1 || opcao2 > estacoesDisponiveis.size()) {
+                                System.out.println("Opção inválida");
+                            } else {
+                                Estacao segunda = estacoesDisponiveis.get(opcao2 - 1);
+                                System.out.print("Informe a distância das mesmas: ");
+                                Double distancia = ler.nextDouble(); ler.nextLine();
+
+                                companiaTremBaum.conectarEstacoes(primeira, segunda, distancia);
+                            }
+
+                        }
+                        System.out.println("\nCONEXÃO REALIZADA COM SUCESSO!");
                         break;
                     case 8:
-
+                        validacao = false;
                         break;
-
                 }
             } else {
                 ler.next();
