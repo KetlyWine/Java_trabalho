@@ -130,7 +130,7 @@ public class Companhia {
         }
     }
     public void escolherEstacoes(Scanner ler) {
-        System.out.println("Escolha as estações (digite os números separados por espaço):");
+        System.out.println("Escolha as estações (digite os números separados por espaço e do maior pro menor):");
         if (ler.hasNextLine()) {
             String input = ler.nextLine();
             String[] numeros = input.split(" ");
