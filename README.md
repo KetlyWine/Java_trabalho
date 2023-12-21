@@ -1,1 +1,1 @@
-Jesus está voltando
+Paciência, só assim para melhorar..
