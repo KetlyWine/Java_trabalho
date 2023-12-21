@@ -50,11 +50,9 @@ public class Passageiro {
 
     @Override
     public String toString() {
-        return "Passageiro{" +
-                "nome='" + nome + '\'' +
-                ", rg='" + rg + '\'' +
-                ", idade=" + idade +
-                ", endereço='" + endereço + '\'' +
-                '}';
+        return "Seus Dados: \n" +
+                "Nome: " + nome + '\n' +
+                "RG: " + rg + '\n' +
+                "Endereço: " + endereço+'\n';
     }
 }

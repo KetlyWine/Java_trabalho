@@ -22,6 +22,16 @@ public class Bilhete {
         this.dataDaCompra = dataDaCompra;
         this.dataDePartida = dataDePartida;
     }
+    public Bilhete(Estacao estacaoPartida, Estacao estacaoChegada, String pagamento,
+                   LocalDateTime dataDaCompra, LocalDateTime dataDePartida) {
+        this.id = count++;
+        this.estacaoPartida = estacaoPartida;
+        this.estacaoChegada = estacaoChegada;
+        this.pagamento = pagamento;
+        this.dataDaCompra = dataDaCompra;
+        this.dataDePartida = dataDePartida;
+    }
+    
 
     public int getId() {
         return id;

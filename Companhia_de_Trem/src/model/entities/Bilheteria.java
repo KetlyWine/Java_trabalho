@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bilheteria {
+    private List<Passageiro> passageiros = new ArrayList<>();
     private Passageiro passageiro;
     private List<Bilhete> bilhetes = new ArrayList<>();
 
     public Bilheteria(Passageiro passageiro){
         this.passageiro = passageiro;
     }
+    public Bilheteria(){}
 
     public void adicionarBilhete(Bilhete bilhete){
         bilhetes.add(bilhete);
@@ -18,7 +20,12 @@ public class Bilheteria {
     public void cancelarBilhete(Bilhete bilhete){
         bilhetes.remove(bilhete);
     }
-
+    public void addPassageiro(Passageiro p){
+        passageiros.add(p);
+    }
+    public void removePassageiro(Passageiro p){
+        passageiros.remove(p);
+    }
     public void mudarPassageiro(Passageiro passag){
         passageiro = passag;
     }
@@ -47,7 +54,7 @@ public class Bilheteria {
         System.out.printf("Valor arrecadado: %.2f\nQuantidade vendida: %d", valor_arrecadado, quantidade);
     }
     public boolean verificarIdade(){
-        if (passageiro.getIdade() < 12)
+        if (passageiro.getIdade() < 18)
             return false;
         return true;
     }

@@ -16,6 +16,7 @@ public class Program {
         Scanner ler = new Scanner(System.in);
         ArrayList<Empresa> empresas = new ArrayList<>();
         ArrayList<Estacao> estacoes = new ArrayList<>();
+        ArrayList<Estacao> estacoesDisponiveis = new ArrayList<>(estacoes);
         ArrayList<Companhia> companhias = new ArrayList<>();
 
         Companhia companhiaecia = new Companhia("Companhia & cia", 10);
@@ -122,6 +123,57 @@ public class Program {
                         String op = ler.next();
                         estacoes.add(new Estacao(name, ende, op));
                         break;
+                    case 3:
+                        System.out.print("Informe seu nome: ");
+                        String nomepas = ler.nextLine();
+                        System.out.print("RG: ");
+                        String rg = ler.nextLine();
+                        System.out.print("Endereço: ");
+                        String endereco = ler.nextLine();
+                        System.out.print("Idade: ");
+                        int idade = ler.nextInt();
+                        Passageiro pass1 = new Passageiro(nomepas,rg, idade, endereco);
+                        if(idade < 18){
+                            System.out.println(pass1);
+                            System.out.println("Idade: "+idade+" -- Menor de idade.");
+                        } else{
+                            System.out.println(pass1);
+                            System.out.println("Idade: "+idade);
+                        }
+                        System.out.println("\nEscolha a estação de Partida: ");
+                        for(int i = 0; i < estacoes.size(); i++){
+                            System.out.println(i+". "+estacoes.get(i).getNome());
+                        }
+                        int indo = 0;
+                        if (ler.hasNextInt()) {
+                            System.out.print("Índice: ");
+                            indo = ler.nextInt();
+                        } else{
+                            ler.next();
+                            System.out.println("Entrada inválida. Tente novamente.");
+                        }
+                        System.out.println("\nEscolha a estação de Chegada: ");
+
+                        for(int i = 0; i < estacoes.size(); i++){
+                            if(!(estacoes.get(i) == estacoes.get(indo))){
+                                System.out.println(i+". "+estacoes.get(i).getNome());
+                            }
+                        }
+                        int voltando =0;
+                        if (ler.hasNextInt()) {
+                            System.out.print("Índice: ");
+                            voltando = ler.nextInt();
+                        } else{
+                            ler.next();
+                            System.out.println("Entrada inválida. Tente novamente.");
+                        }
+                        System.out.println("O preço será decidido quando for realizar a reserva.");
+                        System.out.print("Forma de pagamento: ");
+                        String pag = ler.nextLine();
+                        bt.addPassageiro(pass1);
+                        bt.adicionarBilhete(new Bilhete(estacoes.get(indo),estacoes.get(voltando),
+                                            pag,LocalDateTime.now(),LocalDateTime.now()));
+
                     case 7:
                         System.out.print("Digite o nome da Companhia: ");
                         String nomeC = ler.next();
