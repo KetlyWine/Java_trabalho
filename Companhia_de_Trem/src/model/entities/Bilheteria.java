@@ -34,6 +34,19 @@ public class Bilheteria {
         }
         return "Nenhum bilhete disponível.";
     }
+
+    public double valor(double km){
+        if (km < 20.0){
+            return 5.0;
+        } else if( km < 50){
+            return 6.0;
+        } else if (km < 100) {
+            return 10.0;
+        } else if (km < 200) {
+            return 30.0;
+        } else
+            return 50.0;
+    }
     public void relatorio(){
         double valor_arrecadado = 0;
         int quantidade = 0;
@@ -52,4 +65,11 @@ public class Bilheteria {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Bilheteria{" +
+                "passageiro=" + passageiro +
+                ", bilhetes=" + bilhetes +
+                '}';
+    }
 }

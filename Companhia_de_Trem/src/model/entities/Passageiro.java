@@ -4,16 +4,14 @@ public class Passageiro {
     private String nome;
     private String rg;
     private int idade;
-    private String endereço;
 
     public Passageiro() {
     }
 
-    public Passageiro(String nome, String rg, int idade, String endereço) {
+    public Passageiro(String nome, String rg, int idade) {
         this.nome = nome;
         this.rg = rg;
-        this.idade = idade;
-        this.endereço = endereço;
+        this.idade = idade;;
     }
 
     public String getNome() {
@@ -40,13 +38,7 @@ public class Passageiro {
         this.idade = idade;
     }
 
-    public String getEndereço() {
-        return endereço;
-    }
 
-    public void setEndereço(String endereço) {
-        this.endereço = endereço;
-    }
 
     @Override
     public String toString() {
@@ -54,7 +46,6 @@ public class Passageiro {
                 "nome='" + nome + '\'' +
                 ", rg='" + rg + '\'' +
                 ", idade=" + idade +
-                ", endereço='" + endereço + '\'' +
                 '}';
     }
 }

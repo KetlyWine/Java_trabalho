@@ -13,6 +13,7 @@ public class Companhia {
     private List<Estacao> estacoesDisponiveis;
     private LogisticaDeCarga logisticaDeCarga;
     private List<Trem> trens = new ArrayList<>();
+    private List<Empresa> empresas = new ArrayList<>();
     private Map<Estacao, List<Estacao>> graph = new HashMap<>();
     private Map<AbstractMap.SimpleEntry<Estacao, Estacao>, Double> distancias = new HashMap<>();
 
@@ -93,6 +94,17 @@ public class Companhia {
     public void removerTrem(Trem trem){
         trens.remove(trem);
     }
+
+    public List<Empresa> getEmpresas() {
+        return empresas;
+    }
+    public void addEmpresa(Empresa empresa){
+        empresas.add(empresa);
+    }
+    public void removaEmpresa(Empresa empresa) {
+        empresas.remove(empresa);
+    }
+
     public void conectarEstacoes(Estacao estacao1, Estacao estacao2, double distancia){
         List<Estacao> estacoesConectadas1 = graph.getOrDefault(estacao1, new ArrayList<>());
         estacoesConectadas1.add(estacao2);
@@ -107,15 +119,26 @@ public class Companhia {
         distancias.put(new AbstractMap.SimpleEntry<>(estacao2, estacao1), distancia);
     }
 
+    public double obterDistanciaEntreEstacoes(Estacao estacao1, Estacao estacao2) {
+        // Verifica se a distância está presente no mapa de distâncias
+        if (distancias.containsKey(new AbstractMap.SimpleEntry<>(estacao1, estacao2))) {
+            return distancias.get(new AbstractMap.SimpleEntry<>(estacao1, estacao2));
+        } else {
+            return -1; // Valor padrão ou outra lógica adequada
+        }
+    }
+
     public void exibir() {
         System.out.printf("%-20s %-20s %s%n", "Estação", "Estação Conectada", "Distância");
         System.out.println("-----------------------------------------------------");
+        int i = 1;
         for (Map.Entry<Estacao, List<Estacao>> entry : graph.entrySet()) {
             Estacao estacao = entry.getKey();
             List<Estacao> estacoesConectadas = entry.getValue();
             for (Estacao estacaoConectada : estacoesConectadas) {
                 double distancia = distancias.get(new AbstractMap.SimpleEntry<>(estacao, estacaoConectada));
-                System.out.printf("%-20s %-20s %.2f%n", estacao.getNome(), estacaoConectada.getNome(), distancia);
+                System.out.printf("%d - %-20s %-20s %.2f%n", i, estacao.getNome(), estacaoConectada.getNome(), distancia);
+                i++;
             }
         }
     }
