@@ -15,32 +15,18 @@ public class Program {
     public static void main(String[] args) {
         Scanner ler = new Scanner(System.in);
         DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        ArrayList<Empresa> empresas = new ArrayList<>();
-        ArrayList<Estacao> estacoes = new ArrayList<>();
-        Companhia companhiaecia = new Companhia("Companhia & cia", 10);
-
-        Estacao estacao1 = new Estacao("Cia Station", "Rua Bahia - Bairro carajas", "ativo");
-        Estacao estacao2 = new Estacao("Cia&Cia Station", "Rua Lord - Bairro Flores", "ativo");
-
-        Passageiro pass = new Passageiro();
-        Bilhete bilhete2 = new Bilhete(estacao1, estacao2, 3.0, "cartao", LocalDateTime.now(), LocalDateTime.now());
-        Bilheteria bt = new Bilheteria(pass);
-        bt.adicionarBilhete(bilhete2);
-        bt.imprimirBilhete();
-
-        Empresa surprise = new Empresa("Surprise", "12.345.678/0001-90", "Rua Florida - bairro Sao Jorge", 156, "surprise@gmail.com", "surprise.com", Setor.SERVICOS);
-
-        Companhia companiaTremBaum = new Companhia("Companhia Trem Baum", 8897);
+        
+        Companhia companhiaTremBaum = new Companhia("Companhia Trem Baum", 8897);
         Estacao est1 = new Estacao("TrenBaum", "Rua Bahia - Bairro carajas", "ativo");
         Estacao est2 = new Estacao("TrenBaum - park", "Rua Luzes - Bairro Nova Jessy", "ativo");
-        companiaTremBaum.addEstacao(est1);
-        companiaTremBaum.addEstacao(est2);
-        companiaTremBaum.conectarEstacoes(est1, est2, 40.0);
+        companhiaTremBaum.addEstacao(est1);
+        companhiaTremBaum.addEstacao(est2);
+        companhiaTremBaum.conectarEstacoes(est1, est2, 40.0);
 
         TremPassageiro tremPassageiro1 = new TremPassageiro(1, "Expresso", 1000, FonteDeEnergia.ELETRICA, 10, 60, 30.0);
         TremPassageiro tremPassageiro2 = new TremPassageiro(2, "Expresso", 1200, FonteDeEnergia.DIESEL, 15, 80, 50.0);
-        companiaTremBaum.addTrem(tremPassageiro1);
-        companiaTremBaum.addTrem(tremPassageiro2);
+        companhiaTremBaum.addTrem(tremPassageiro1);
+        companhiaTremBaum.addTrem(tremPassageiro2);
 
         boolean validacao = true;
         while (validacao){
@@ -91,22 +77,22 @@ public class Program {
 
                                     switch (set) {
                                         case 1:
-                                            companiaTremBaum.addEmpresa(new Empresa(nome, cnpj, end, numero, email, site, Setor.INDUSTRIA));
+                                            companhiaTremBaum.addEmpresa(new Empresa(nome, cnpj, end, numero, email, site, Setor.INDUSTRIA));
                                             break;
                                         case 2:
-                                            companiaTremBaum.addEmpresa(new Empresa(nome, cnpj, end, numero, email, site, Setor.MINERACAO));
+                                            companhiaTremBaum.addEmpresa(new Empresa(nome, cnpj, end, numero, email, site, Setor.MINERACAO));
                                             break;
                                         case 3:
-                                            companiaTremBaum.addEmpresa(new Empresa(nome, cnpj, end, numero, email, site, Setor.SERVICOS));
+                                            companhiaTremBaum.addEmpresa(new Empresa(nome, cnpj, end, numero, email, site, Setor.SERVICOS));
                                             break;
                                         case 4:
-                                            companiaTremBaum.addEmpresa(new Empresa(nome, cnpj, end, numero, email, site, Setor.AGRICULTURA));
+                                            companhiaTremBaum.addEmpresa(new Empresa(nome, cnpj, end, numero, email, site, Setor.AGRICULTURA));
                                             break;
                                         case 5:
-                                            companiaTremBaum.addEmpresa(new Empresa(nome, cnpj, end, numero, email, site, Setor.AUTOMOTIVO));
+                                            companhiaTremBaum.addEmpresa(new Empresa(nome, cnpj, end, numero, email, site, Setor.AUTOMOTIVO));
                                             break;
                                         case 6:
-                                            companiaTremBaum.addEmpresa(new Empresa(nome, cnpj, end, numero, email, site, Setor.MANUFATUREIRA));
+                                            companhiaTremBaum.addEmpresa(new Empresa(nome, cnpj, end, numero, email, site, Setor.MANUFATUREIRA));
                                             break;
                                         default:
                                             System.out.println("Número inválido.");
@@ -132,7 +118,7 @@ public class Program {
                             System.out.print("Estado operacional: ");
                             String op = ler.nextLine();
 
-                            companiaTremBaum.addEstacao(new Estacao(name, ende, op));
+                            companhiaTremBaum.addEstacao(new Estacao(name, ende, op));
 
                             System.out.println("ESTAÇÃO CADASTRADA COM SUCESSO!");
 
@@ -162,23 +148,23 @@ public class Program {
                             System.out.println("======= BILHETERIA =======");
                             if (bilheteria.verificarIdade()) {
                                 System.out.println("Estações: ");
-                                companiaTremBaum.exibir();
+                                companhiaTremBaum.exibir();
 
                                 System.out.print("Informe a estação de Partida: ");
                                 int indexPartida = ler.nextInt();
-                                Estacao estacaoPartida = companiaTremBaum.getEstacoes().get(indexPartida - 1);
+                                Estacao estacaoPartida = companhiaTremBaum.getEstacoes().get(indexPartida - 1);
 
-                                companiaTremBaum.getEstacoes().get(indexPartida-1).setBilheteria(bilheteria);
+                                companhiaTremBaum.getEstacoes().get(indexPartida-1).setBilheteria(bilheteria);
 
                                 System.out.print("Informe a estação de Chegada: ");
                                 int indexChegada = ler.nextInt();
                                 ler.nextLine();
-                                Estacao estacaoChegada = companiaTremBaum.getEstacoes().get(indexChegada - 1);
+                                Estacao estacaoChegada = companhiaTremBaum.getEstacoes().get(indexChegada - 1);
 
                                 System.out.print("Tipo de pagamento: ");
                                 String formapagamento = ler.nextLine();
 
-                                double distancia = companiaTremBaum.obterDistanciaEntreEstacoes(estacaoPartida, estacaoChegada);
+                                double distancia = companhiaTremBaum.obterDistanciaEntreEstacoes(estacaoPartida, estacaoChegada);
                                 double valor = 0;
 
                                 if (distancia != -1) {
@@ -189,7 +175,7 @@ public class Program {
                                 }
                                 int i = 0;
                                 System.out.println("Trens disponíveis - selecione: ");
-                                for (Trem trem : companiaTremBaum.getTrens()) {
+                                for (Trem trem : companhiaTremBaum.getTrens()) {
                                     if (trem instanceof TremPassageiro) {
                                         TremPassageiro tremPassageiro = (TremPassageiro) trem;
                                         System.out.printf("%d - id: %d - %s - %s\n", i+1, tremPassageiro.getNumero(), tremPassageiro.getModelo(), tremPassageiro.toString());
@@ -199,7 +185,7 @@ public class Program {
 
                                 System.out.print("opção (numero): ");
                                 int index = ler.nextInt();
-                                TremPassageiro trem = (TremPassageiro) companiaTremBaum.getTrens().get(index-1);
+                                TremPassageiro trem = (TremPassageiro) companhiaTremBaum.getTrens().get(index-1);
                                 Reserva reserva = new Reserva(trem);
 
                                 System.out.println("Reserve um assento: ");
@@ -230,7 +216,7 @@ public class Program {
                             int i = 0;
                             System.out.println("|\tInforme a estação do relatório\t|");
 
-                            for (Estacao estacao : companiaTremBaum.getEstacoes()) {
+                            for (Estacao estacao : companhiaTremBaum.getEstacoes()) {
                                 i++;
                                 System.out.printf("%d - %s%n", i, estacao.getNome());
                             }
@@ -238,10 +224,10 @@ public class Program {
                             System.out.print("Estação (número): ");
                             int num = ler.nextInt();
 
-                            if (num < 1 || num > companiaTremBaum.getEstacoes().size()) {
+                            if (num < 1 || num > companhiaTremBaum.getEstacoes().size()) {
                                 System.out.println("Número de estação inválido. Informe um número válido.");
                             } else {
-                                Estacao estacao = companiaTremBaum.getEstacoes().get(num - 1);
+                                Estacao estacao = companhiaTremBaum.getEstacoes().get(num - 1);
 
                                 System.out.println("\t----- Relatório -----");
 
@@ -260,7 +246,7 @@ public class Program {
 
                     case 5:
                         try {
-                            if (!companiaTremBaum.getEmpresas().isEmpty()) {
+                            if (!companhiaTremBaum.getEmpresas().isEmpty()) {
                                 System.out.println("--- Informações para realização do Contrato ---");
                                 System.out.print("Data de inicio (dd/MM/yyyy HH:mm): ");
                                 String dataInicio = ler.nextLine();
@@ -274,7 +260,7 @@ public class Program {
                                 System.out.println("Escolha a empresa relacionada: ");
 
                                 int i = 1;
-                                for (Empresa empresa : companiaTremBaum.getEmpresas()) {
+                                for (Empresa empresa : companhiaTremBaum.getEmpresas()) {
                                     System.out.printf("%d - %s - %s%n", i, empresa.getNome(), empresa.getSetor());
                                     i++;
                                 }
@@ -282,10 +268,10 @@ public class Program {
                                 System.out.print("Empresa (numero): ");
                                 int index = ler.nextInt();
                                 ler.nextLine(); // Consume the newline character
-                                Empresa empresa = companiaTremBaum.getEmpresas().get(index - 1);
+                                Empresa empresa = companhiaTremBaum.getEmpresas().get(index - 1);
 
                                 Contrato contrato = new Contrato(LocalDate.parse(dataInicio, formatoData), LocalDate.parse(dataFinal, formatoData), orcamento, tipoCarga, empresa);
-                                companiaTremBaum.addContrato(contrato);
+                                companhiaTremBaum.addContrato(contrato);
                                 System.out.println("CONTRATO REALIZADO COM SUCESSO");
                                 System.out.println(contrato.toString());
                             } else {
@@ -319,7 +305,7 @@ public class Program {
                                 double capacidade = ler.nextDouble(); ler.nextLine();
 
                                 TremPassageiro tremPassageiro = new TremPassageiro(numero, modelo, potencia, FonteDeEnergia.ELETRICA, numVagao, capacPassag, capacidade);
-                                companiaTremBaum.addTrem(tremPassageiro);
+                                companhiaTremBaum.addTrem(tremPassageiro);
                             } else {
                                 System.out.println(" -- Trem Carga --");
                                 System.out.print("Numero: ");
@@ -334,7 +320,7 @@ public class Program {
                                 double capacidade = ler.nextDouble(); ler.nextLine();
 
                                 TremCarga tremcarga = new TremCarga(numero, modelo, potencia, numVagao,FonteDeEnergia.ELETRICA, capacidade);
-                                companiaTremBaum.addTrem(tremcarga);
+                                companhiaTremBaum.addTrem(tremcarga);
                             }
                         } else
                             System.out.println("Opção inválida");
@@ -344,7 +330,7 @@ public class Program {
                         int i = 0;
                         System.out.println(" ==== CONECTAR ESTAÇÕES ====");
                         System.out.println("Primeira estação: ");
-                        List<Estacao> estacoesDisponiveis = new ArrayList<>(companiaTremBaum.getEstacoes());
+                        List<Estacao> estacoesDisponiveis = new ArrayList<>(companhiaTremBaum.getEstacoes());
 
                         for (Estacao estacao : estacoesDisponiveis) {
                             System.out.printf("%d - %s%n", i+1, estacao.getNome());
@@ -379,7 +365,7 @@ public class Program {
                                 System.out.print("Informe a distância das mesmas: ");
                                 Double distancia = ler.nextDouble(); ler.nextLine();
 
-                                companiaTremBaum.conectarEstacoes(primeira, segunda, distancia);
+                                companhiaTremBaum.conectarEstacoes(primeira, segunda, distancia);
                             }
 
                         }
