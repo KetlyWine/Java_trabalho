@@ -4,3 +4,4 @@ Programa simples envolvendo conceitos de POO aplicados a um sistema fictício de
 
 #### UML das Classes
 
+![image uml classes](../CompanhiaTrem.png)
